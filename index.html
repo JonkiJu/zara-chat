@@ -1,30 +1,68 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zara Chat</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Zara Chat — Secure</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Модаль для введення пароля -->
+  <div id="pwModal" class="modal">
+    <div class="modal-content">
+      <h2>Введіть пароль</h2>
+      <input id="pwInput" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="5" placeholder="В ведіть пароль" />
+      <div class="modal-actions">
+        <button id="pwSubmit">Увійти</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модаль для зміни пароля -->
+  <div id="changePwModal" class="modal">
+    <div class="modal-content">
+      <h2>Змінити пароль</h2>
+      <input id="curPw" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="5" placeholder="Поточний пароль" />
+      <input id="newPw" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="5" placeholder="Новий пароль (макс 5 цифр)" />
+      <div class="modal-actions">
+        <button id="changePwBtn">Змінити</button>
+        <button id="cancelChangePw">Відмінити</button>
+      </div>
+      <p id="changePwMsg" class="small muted"></p>
+    </div>
+  </div>
+
   <div class="chat-wrapper">
     <header class="chat-header">
       <h1>💬 Zara Chat</h1>
-      <button id="themeToggle">🌙</button>
+      <div class="header-actions">
+        <button id="changePwOpen" title="Змінити пароль">🔒</button>
+        <button id="themeToggle" title="Тема">🌙</button>
+      </div>
     </header>
 
-    <div class="chat-container">
-      <div id="messages" class="messages"></div>
-      <form id="messageForm" class="message-form">
-        <input type="text" id="messageInput" placeholder="Напишіть повідомлення..." autocomplete="off">
-        <button type="submit">➤</button>
+    <main class="chat-main">
+      <div id="messages" class="messages" aria-live="polite" aria-atomic="false"></div>
+    </main>
+
+    <footer class="chat-footer">
+      <div class="left-controls">
+        <div id="senderPicker" class="sender-picker">
+          <div class="sender" data-color="blue" id="senderBlue" title="Відправляти як синій"></div>
+          <div class="sender" data-color="red" id="senderRed" title="Відправляти як червоний"></div>
+        </div>
+      </div>
+
+      <form id="messageForm" class="message-form" autocomplete="off">
+        <input id="messageInput" type="text" placeholder="Напишіть повідомлення..." />
+        <button type="submit" id="sendBtn">➤</button>
       </form>
-    </div>
+    </footer>
   </div>
 
   <audio id="notificationSound" src="https://cdn.pixabay.com/download/audio/2023/03/14/audio_6d2a046b84.mp3?filename=message-notification-125041.mp3"></audio>
 
-  <!-- Firebase SDK -->
+  <!-- App (ES module) -->
   <script type="module" src="app.js"></script>
 </body>
 </html>
